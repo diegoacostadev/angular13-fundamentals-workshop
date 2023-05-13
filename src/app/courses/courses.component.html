@@ -28,22 +28,69 @@
     <mat-card>
       <mat-card-header>
         <mat-card-title>
-          Select Course
+          <span *ngIf="selectedCourse?.id; else elseBlock">
+            {{ selectedTitle | titlecase }}
+          </span>
+          <ng-template #elseBlock>
+              Select Course
+          </ng-template>
         </mat-card-title>
       </mat-card-header>
-      <mat-card-content>
-
-        <pre>
-              {{ selectedCourse | json }}
-            </pre>
-        <!-- COURSE FORM -->
-
-      </mat-card-content>
-      <mat-card-actions>
-
-        <!-- COURSE ACTIONS -->
-
-      </mat-card-actions>
+      <form #form="ngForm" (submit)="saveCourse(selectedCourse)">
+        <mat-card-content>
+          <!-- COURSE FORM -->
+          <mat-form-field class="full-width">
+            <mat-label>Input</mat-label>
+            <input
+              matInput
+              type="text"
+              placeholder="Title"
+              required
+              [(ngModel)]="selectedCourse.title"
+              name="title">
+          </mat-form-field>
+          <mat-form-field class="full-width">
+            <mat-label>Description</mat-label>
+            <input
+              matInput
+              type="text"
+              placeholder="Description"
+              [(ngModel)]="selectedCourse.description"
+              name="description">
+          </mat-form-field>
+          <section class="full-width">
+            <h4>{{ selectedCourse.percentComplete }}% Completed</h4>
+            <mat-slider
+              class="full-width"
+              min="0"
+              max="100"
+              step="1"
+              [value]="selectedCourse.percentComplete"
+              thumblabel
+              name="percent"
+              [(ngModel)]="selectedCourse.percentComplete">
+            </mat-slider>
+          </section>
+          <section class="full-width">
+            <mat-checkbox [(ngModel)]="selectedCourse.favorite" name="favorite">
+              Favorite
+            </mat-checkbox>
+          </section>
+        </mat-card-content>
+        <mat-card-actions>
+          <!-- COURSE ACTIONS -->
+          <button type="submit" mat-button color="primary" [disabled]="form.invalid">
+            Submit
+          </button>
+          <button *ngIf="selectedCourse" type="button" mat-button
+            (click)="reset()">
+            Cancel
+          </button>
+        </mat-card-actions>
+        <hr>
+        <pre>{{ form.value | json }}</pre>
+        <pre>{{ form.valid | json }}</pre>
+      </form>
     </mat-card>
   </div>
 </div>

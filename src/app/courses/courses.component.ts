@@ -1,4 +1,13 @@
 import { Component, OnInit } from '@angular/core';
+import { Course } from 'src/app/common/models/course';
+
+const emptyCourse: Course = {
+  id: null,
+  title: '',
+  description: '',
+  percentComplete: 0,
+  favorite: false,
+}
 
 @Component({
   selector: 'app-courses',
@@ -12,7 +21,7 @@ export class CoursesComponent implements OnInit {
       title: 'Angular 13 Fundamentals',
       description: 'Learn the fundamentals of Angular 13',
       percentComplete: 26,
-      favorite: true
+      favorite: false
     },
     {
       id: 2,
@@ -30,7 +39,8 @@ export class CoursesComponent implements OnInit {
     }
   ];
 
-  selectedCourse = null;
+  selectedCourse = emptyCourse;
+  selectedTitle = '';
 
   constructor() { }
 
@@ -38,11 +48,27 @@ export class CoursesComponent implements OnInit {
   }
 
   selectCourse(course) {
-    this.selectedCourse = course;
+    this.selectedCourse = { ...course };
+    this.selectedTitle = course.title;
+  }
+
+  reset() {
+    this.selectCourse({ ...emptyCourse });
   }
 
   deleteCourse(id: number) {
     this.courses = this.courses.filter(c => c.id !== id);
+  }
+
+  saveCourse(course) {
+    this.courses = this.courses.map(c => {
+      if (c.id == course.id) {
+        return {
+          ...course
+        };
+      }
+      return c;
+    })
   }
 
 }
