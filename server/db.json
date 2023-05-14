@@ -1,11 +1,31 @@
 {
   "courses": [
     {
-      "id": 1,
-      "title": "Angular 13 Fundamentals",
-      "description": "Learn the fundamentals of Angular 13",
-      "percentComplete": 26,
+      "id": "eeTXEvj",
+      "title": "New Awesome Courses!",
+      "description": "Learn with these awesome course the new features of ES6.",
+      "percentComplete": 0,
       "favorite": true
+    },
+    {
+      "id": "IUZ8ZH1",
+      "title": "Javascript: The Hard Parts v2!",
+      "description": "Learn javascript like a pro!!!!",
+      "percentComplete": 31,
+      "favorite": true
+    },
+    {
+      "id": "FnL1Ote",
+      "title": "Getting Started with Scss",
+      "description": "Get to know CSS in the right way without the fluff. ",
+      "percentComplete": 0,
+      "favorite": false
+    }
+  ],
+  "lessons": [
+    {
+      "id": "1",
+      "title": "Component Driven Architecture"
     }
   ]
 }
